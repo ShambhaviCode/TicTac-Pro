@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>TicTac Pro</title>
+
+<link rel="stylesheet"
+href="style.css">
+
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+</head>
+
+<body>
+
+<div class="background"></div>
+
+<div class="container">
+
+<div class="phone-notch"></div>
+
+<h1>
+TicTac
+<span>Pro</span>
+</h1>
+
+<div class="scoreboard">
+
+<div class="score-card">
+
+<h3>Player X</h3>
+
+<p id="scoreX">0</p>
+
+</div>
+
+<div class="score-card">
+
+<h3>Draw</h3>
+
+<p id="scoreDraw">0</p>
+
+</div>
+
+<div class="score-card">
+
+<h3>Player O</h3>
+
+<p id="scoreO">0</p>
+
+</div>
+
+</div>
+
+<div class="settings">
+
+<select id="mode">
+
+<option value="pvp">
+Player vs Player
+</option>
+
+<option value="ai">
+Player vs AI
+</option>
+
+</select>
+
+<select id="difficulty">
+
+<option value="easy">
+Easy
+</option>
+
+<option value="medium">
+Medium
+</option>
+
+<option value="hard">
+Impossible
+</option>
+
+</select>
+
+</div>
+
+<div
+class="status"
+id="status">
+
+Player X's Turn
+
+</div>
+
+<div
+class="board"
+id="board">
+
+<div class="cell" data-index="0"></div>
+<div class="cell" data-index="1"></div>
+<div class="cell" data-index="2"></div>
+
+<div class="cell" data-index="3"></div>
+<div class="cell" data-index="4"></div>
+<div class="cell" data-index="5"></div>
+
+<div class="cell" data-index="6"></div>
+<div class="cell" data-index="7"></div>
+<div class="cell" data-index="8"></div>
+
+</div>
+
+<div class="buttons">
+
+<button id="newGame">
+
+🎮 New Game
+
+</button>
+
+<button id="resetScores">
+
+🗑 Reset Scores
+
+</button>
+
+</div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

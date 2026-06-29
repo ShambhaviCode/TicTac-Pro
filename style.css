@@ -1,0 +1,639 @@
+/* ==========================================
+   TicTac Pro
+   style.css
+   Part 1/2
+========================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+
+    --bg:#09090f;
+    --card:rgba(255,255,255,.08);
+    --border:rgba(255,255,255,.12);
+
+    --blue:#60a5fa;
+    --pink:#ec4899;
+    --green:#10b981;
+    --yellow:#facc15;
+
+    --text:#ffffff;
+    --muted:#94a3b8;
+
+}
+
+body{
+
+    font-family:'Poppins',sans-serif;
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:#09090f;
+
+    overflow:hidden;
+
+    color:white;
+
+}
+
+/* Background */
+
+.background{
+
+    position:fixed;
+
+    inset:0;
+
+    background:
+
+    radial-gradient(circle at 20% 20%,#2563eb55,transparent 30%),
+
+    radial-gradient(circle at 80% 20%,#ec489955,transparent 35%),
+
+    radial-gradient(circle at 50% 90%,#10b98155,transparent 35%),
+
+    #09090f;
+
+    animation:bgMove 12s linear infinite alternate;
+
+    z-index:-1;
+
+}
+
+@keyframes bgMove{
+
+0%{
+
+transform:scale(1);
+
+}
+
+100%{
+
+transform:scale(1.2);
+
+}
+
+}
+
+/* Phone Card */
+
+.container{
+
+    position:relative;
+
+    width:390px;
+
+    max-width:95vw;
+
+    min-height:760px;
+
+    padding:55px 25px 25px;
+
+    border-radius:35px;
+
+    background:var(--card);
+
+    backdrop-filter:blur(20px);
+
+    border:1px solid var(--border);
+
+    box-shadow:
+
+    0 25px 70px rgba(0,0,0,.55),
+
+    0 0 40px rgba(96,165,250,.18);
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.phone-notch{
+
+    position:absolute;
+
+    top:10px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    width:120px;
+
+    height:28px;
+
+    background:#000;
+
+    border-radius:20px;
+
+}
+
+/* Title */
+
+h1{
+
+    text-align:center;
+
+    font-size:3rem;
+
+    font-weight:700;
+
+    margin-bottom:25px;
+
+    animation:titleFloat 3s ease infinite;
+
+}
+
+h1 span{
+
+    color:var(--pink);
+
+}
+
+@keyframes titleFloat{
+
+0%,100%{
+
+transform:translateY(0);
+
+}
+
+50%{
+
+transform:translateY(-5px);
+
+}
+
+}
+
+/* Scoreboard */
+
+.scoreboard{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:12px;
+
+}
+
+.score-card{
+
+    background:rgba(255,255,255,.05);
+
+    border:1px solid var(--border);
+
+    border-radius:18px;
+
+    padding:15px;
+
+    text-align:center;
+
+}
+
+.score-card h3{
+
+    color:var(--muted);
+
+    font-size:.9rem;
+
+    margin-bottom:8px;
+
+}
+
+.score-card p{
+
+    font-size:2rem;
+
+    font-weight:700;
+
+}
+
+/* Settings */
+
+.settings{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:12px;
+
+    margin:22px 0;
+
+}
+
+select{
+
+    width:100%;
+
+    padding:14px;
+
+    border:none;
+
+    outline:none;
+
+    border-radius:15px;
+
+    background:#1f2937;
+
+    color:white;
+
+    font-size:15px;
+
+    cursor:pointer;
+
+}
+
+/* Status */
+
+.status{
+
+    text-align:center;
+
+    padding:14px;
+
+    border-radius:15px;
+
+    background:rgba(255,255,255,.05);
+
+    color:var(--yellow);
+
+    font-weight:600;
+
+    margin-bottom:22px;
+
+}
+
+/* Board */
+
+.board{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:12px;
+
+    animation:boardIn .7s ease;
+
+}
+
+@keyframes boardIn{
+
+from{
+
+opacity:0;
+
+transform:scale(.85);
+
+}
+
+to{
+
+opacity:1;
+
+transform:scale(1);
+
+}
+
+}
+
+.cell{
+
+    aspect-ratio:1;
+
+    background:#1f2937;
+
+    border-radius:20px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    cursor:pointer;
+
+    font-size:3.4rem;
+
+    font-weight:700;
+
+    transition:.25s;
+
+    user-select:none;
+
+}
+
+.cell:hover{
+
+    background:#374151;
+
+    transform:scale(1.05) rotate(2deg);
+
+}
+
+.cell.x{
+
+    color:var(--blue);
+
+    text-shadow:
+
+    0 0 12px var(--blue),
+
+    0 0 25px var(--blue);
+
+}
+
+.cell.o{
+
+    color:var(--pink);
+
+    text-shadow:
+
+    0 0 12px var(--pink),
+
+    0 0 25px var(--pink);
+
+}
+/* ==========================================
+   TicTac Pro
+   style.css
+   Part 2/2
+========================================== */
+
+/* ===========================
+   Cell Animations
+=========================== */
+
+.cell.x,
+.cell.o{
+
+    animation:pop .25s ease;
+
+}
+
+@keyframes pop{
+
+    0%{
+
+        transform:scale(.2);
+
+        opacity:.2;
+
+    }
+
+    100%{
+
+        transform:scale(1);
+
+        opacity:1;
+
+    }
+
+}
+
+/* ===========================
+   Winner
+=========================== */
+
+.cell.win{
+
+    background:#10b981;
+
+    color:white !important;
+
+    box-shadow:
+
+        0 0 15px #10b981,
+
+        0 0 35px #10b981,
+
+        0 0 60px #10b981;
+
+    animation:winner .8s infinite;
+
+}
+
+@keyframes winner{
+
+    0%{
+
+        transform:scale(1);
+
+    }
+
+    50%{
+
+        transform:scale(1.08);
+
+    }
+
+    100%{
+
+        transform:scale(1);
+
+    }
+
+}
+
+/* ===========================
+   Buttons
+=========================== */
+
+.buttons{
+
+    margin-top:auto;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:15px;
+
+}
+
+button{
+
+    width:100%;
+
+    padding:16px;
+
+    border:none;
+
+    border-radius:16px;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    color:white;
+
+    transition:.25s;
+
+}
+
+#newGame{
+
+    background:linear-gradient(
+        135deg,
+        #3b82f6,
+        #2563eb
+    );
+
+}
+
+#resetScores{
+
+    background:linear-gradient(
+        135deg,
+        #ec4899,
+        #db2777
+    );
+
+}
+
+button:hover{
+
+    transform:translateY(-4px);
+
+    filter:brightness(1.08);
+
+    box-shadow:
+
+        0 12px 25px rgba(0,0,0,.35);
+
+}
+
+button:active{
+
+    transform:scale(.98);
+
+}
+
+/* ===========================
+   Scrollbar
+=========================== */
+
+::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#374151;
+
+    border-radius:20px;
+
+}
+
+/* ===========================
+   Responsive
+=========================== */
+
+@media (max-width:500px){
+
+    .container{
+
+        width:100%;
+
+        max-width:100%;
+
+        min-height:100vh;
+
+        border-radius:0;
+
+        padding:55px 20px 20px;
+
+    }
+
+    .phone-notch{
+
+        display:none;
+
+    }
+
+    h1{
+
+        font-size:2.3rem;
+
+    }
+
+    .cell{
+
+        font-size:2.8rem;
+
+    }
+
+    .score-card p{
+
+        font-size:1.6rem;
+
+    }
+
+    .settings{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+@media (min-width:900px){
+
+    .container{
+
+        width:430px;
+
+        min-height:780px;
+
+    }
+
+}
+
+/* ===========================
+   Smooth Fade
+=========================== */
+
+.container{
+
+    animation:fadeIn .8s ease;
+
+}
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(20px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
