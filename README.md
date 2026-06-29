@@ -56,14 +56,6 @@ git clone https://github.com/ShambhaviCode/TicTac-Pro.git
 
 Open `index.html` in your browser.
 
-## Future Enhancements
-
-* Online multiplayer support
-* Sound effects and background music
-* Animated winning line
-* Move history and undo functionality
-* Player statistics dashboard
-* Progressive Web App (PWA) support
 
 ## License
 
