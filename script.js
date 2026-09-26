@@ -23,6 +23,9 @@ let currentPlayer = "X";
 
 let gameRunning = true;
 
+// Pending AI move, so a new game can cancel it.
+let aiTimer = null;
+
 const WIN_PATTERNS = [
 
     [0,1,2],
@@ -97,6 +100,14 @@ function handleCellClick(e){
     if(board[index]!="")
         return;
 
+    // While the AI is "thinking", currentPlayer is already "O",
+    // so a click here would place O on the AI's behalf.
+    if(
+        modeSelect.value==="ai" &&
+        currentPlayer==="O"
+    )
+        return;
+
     playMove(index,currentPlayer);
 
     if(checkWinner())
@@ -114,7 +125,7 @@ function handleCellClick(e){
 
         statusText.textContent="AI Thinking...";
 
-        setTimeout(aiMove,500);
+        aiTimer=setTimeout(aiMove,500);
 
     }
 
@@ -145,6 +156,12 @@ function switchPlayer(){
 }
 
 function startNewGame(){
+
+    // Otherwise a move queued in the previous game
+    // lands on the fresh board.
+    clearTimeout(aiTimer);
+
+    aiTimer=null;
 
     board=Array(9).fill("");
 
@@ -271,6 +288,8 @@ function celebrate() {
 // ---------- AI ----------
 
 function aiMove() {
+
+    aiTimer = null;
 
     if (!gameRunning)
         return;
@@ -432,8 +451,15 @@ function minimax(boardState, depth, isMaximizing) {
 
     let result = evaluateBoard(boardState);
 
-    if (result !== null)
+    // Prefer faster wins and slower losses.
+    if (result === 10)
         return result - depth;
+
+    if (result === -10)
+        return result + depth;
+
+    if (result !== null)
+        return result;
 
     if (isMaximizing) {
 
